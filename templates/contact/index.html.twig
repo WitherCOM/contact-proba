@@ -3,6 +3,16 @@
 {% block title %}Contact Form{% endblock %}
 
 {% block body %}
+{% if isset(notokay) %}
+<div>
+Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen
+</div>
+{% endif %}
+{% if isset(okay) %}
+<div>
+Hiba! Kérjük töltsd ki az összes mezőt!
+</div>
+{% endif %}
 
 {{ form(form) }}
 

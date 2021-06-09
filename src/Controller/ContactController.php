@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ContactController extends AbstractController
 {
@@ -47,14 +47,16 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            
             $contact = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('index',['form'=>'okay']);
         }
 
-
-
-        return $this->redirectToRoute('index');
+        return $this->redirectToRoute('index',['notokay']);
     }
 
 
