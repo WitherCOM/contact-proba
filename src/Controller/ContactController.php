@@ -17,9 +17,8 @@ class ContactController extends AbstractController
 
     public function index(): Response
     {
-        $contact = new Contact();
 
-        $form = $this->createFormBuilder($contact)
+        $form = $this->createFormBuilder()
         ->add('name',TextType::class,['label'=>'Neved'])
         ->add('email',EmailType::class,['label'=>'E-mail címed'])
         ->add('text',TextareaType::class,['label'=>'Üzenet szövege'])
