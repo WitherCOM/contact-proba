@@ -1,4 +1,10 @@
 index:
     path: /
     controller: App\Controller\ContactController::index
+    methods: GET
+
+contact:
+    path: /
+    controller: App\Controller\ContactController::contact
+    methods: POST
 
