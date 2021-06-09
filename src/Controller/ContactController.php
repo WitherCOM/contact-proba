@@ -53,7 +53,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('index',['form'=>'okay']);
+            return $this->redirectToRoute('index',['okay']);
         }
 
         return $this->redirectToRoute('index',['notokay']);
