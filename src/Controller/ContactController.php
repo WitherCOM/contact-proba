@@ -19,9 +19,9 @@ class ContactController extends AbstractController
     {
 
         $form = $this->createFormBuilder()
-        ->add('name',TextType::class,['label'=>'Neved'])
-        ->add('email',EmailType::class,['label'=>'E-mail címed'])
-        ->add('text',TextareaType::class,['label'=>'Üzenet szövege'])
+        ->add('name',TextType::class,['label'=>'Neved','required' => true])
+        ->add('email',EmailType::class,['label'=>'E-mail címed','required' => true])
+        ->add('text',TextareaType::class,['label'=>'Üzenet szövege','required' => true])
         ->add('send',SubmitType::class,['label'=>'Küldés'])
         ->setMethod('post')
         ->getForm();
