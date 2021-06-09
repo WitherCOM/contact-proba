@@ -25,7 +25,6 @@ class ContactController extends AbstractController
         ->add('send',SubmitType::class,['label'=>'Küldés'])
         ->setMethod('post')
         ->getForm();
-
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView()
         ]);
@@ -41,7 +40,6 @@ class ContactController extends AbstractController
         ->add('text',TextareaType::class,['label'=>'Üzenet szövege'])
         ->add('send',SubmitType::class,['label'=>'Küldés'])
         ->getForm();
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,11 +49,11 @@ class ContactController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);
             $entityManager->flush();
-
-            return $this->redirectToRoute('index',['okay']);
+            $this->addFlash('notice','okay');
+            return $this->redirectToRoute('index');
         }
-
-        return $this->redirectToRoute('index',['notokay']);
+        $this->addFlash('notice','notokay');
+        return $this->redirectToRoute('index');
     }
 
 

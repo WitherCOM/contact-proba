@@ -3,13 +3,14 @@
 {% block title %}Contact Form{% endblock %}
 
 {% block body %}
-{% if notokay is defined %}
-<div>
+{% set notice = app.flashes('notice') %}
+{% if 'okay' in notice %}
+<div class="bg-success border" >
 Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen
 </div>
 {% endif %}
-{% if okay is defined %}
-<div>
+{% if 'notokay' in notice %}
+<div class="bg-danger border">
 Hiba! Kérjük töltsd ki az összes mezőt! 
 </div>
 {% endif %}
