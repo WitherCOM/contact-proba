@@ -88,6 +88,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "heroku/heroku-buildpack-php": {
+        "version": "v193"
+    },
     "laminas/laminas-code": {
         "version": "4.3.0"
     },
