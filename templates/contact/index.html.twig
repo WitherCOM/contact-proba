@@ -3,12 +3,12 @@
 {% block title %}Contact Form{% endblock %}
 
 {% block body %}
-{% if isset(notokay) %}
+{% if notokay is defined %}
 <div>
 Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen
 </div>
 {% endif %}
-{% if isset(okay) %}
+{% if okay is defined %}
 <div>
 Hiba! Kérjük töltsd ki az összes mezőt! 
 </div>
