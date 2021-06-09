@@ -10,15 +10,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ContactController extends AbstractController
 {
 
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
-
-        $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder($session->get('formData'))
         ->add('name',TextType::class,['label'=>'Neved','required' => false])
         ->add('email',EmailType::class,['label'=>'E-mail címed','required' => false])
         ->add('text',TextareaType::class,['label'=>'Üzenet szövege','required' => false])
@@ -30,7 +30,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    public function contact(Request $request): Response
+    public function contact(SessionInterface $session,Request $request): Response
     {
         $contact = new Contact();
 
@@ -52,8 +52,10 @@ class ContactController extends AbstractController
             $this->addFlash('notice','okay');
             return $this->redirectToRoute('index');
         }
+        $tempData = $form->getData();
+        $session->set('formData',$tempData);
         $this->addFlash('notice','notokay');
-        return $this->redirectToRoute('index');
+        return $this->redirectToRoute('index',);
     }
 
 
